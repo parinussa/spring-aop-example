@@ -5,9 +5,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PingService {
-    public Ping getPing() {
-        Ping ping = new Ping("pong");
+    Ping ping;
 
+    public PingService() {
+        this.ping = new Ping("pong");
+    }
+
+    public Ping getPing() {
+        return ping;
+    }
+
+    public Ping getPing(boolean run) {
         return ping;
     }
 }

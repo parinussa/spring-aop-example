@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,8 +16,14 @@ public class PingController {
     PingService pingService;
 
     @GetMapping
-    public ResponseEntity<Ping> ping() {
-        Ping ping = pingService.getPing();
+    public ResponseEntity<Ping> ping(@RequestParam(defaultValue = "false") boolean run) {
+        Ping ping = null;
+
+        if (run) {
+            ping = pingService.getPing(true);
+        } else {
+            ping = pingService.getPing();
+        }
 
         return ResponseEntity.ok(ping);
     }
